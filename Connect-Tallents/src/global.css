@@ -1,68 +1,460 @@
+@import "tailwindcss";
+
+/* =============================
+      VARIÁVEIS DE COR 
+============================= */
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* Verde metálico principal */
+  --verde-metalico-principal: #1EC88A;
+  --verde-metalico-escuro: #159F70;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* Tons claros neutros */
+  --branco-principal: #FFFFFF;
+  --branco-suave: #FAFAFA;
+  --cinza-suave: #F3F6F5;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  /* Tons verdes extremamente suaves */
+  --verde-metalico-claro: #B9F4DD;
+  --verde-metalico-suave: #E9FFF7;
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
+  /* Texto */
+  --texto-escuro: #1F2D2B;
+  --texto-medio: #3B4A47;
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  /* Sombra */
+  --sombra-padrao: rgba(0, 0, 0, 0.05);
+
+  --fonte: "Roboto", sans-serif;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
+@layer base {
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+  html,
+  body {
+    @apply h-full;
+    font-family: var(--fonte);
   }
-  a:hover {
-    color: #747bff;
+
+  body {
+    @apply flex flex-col min-h-screen m-0 p-0;
+    background-color: var(--branco-suave);
+    color: var(--texto-escuro);
   }
-  button {
-    background-color: #f9f9f9;
+
+  main {
+    @apply flex-1 pt-[80px];
+  }
+
+  * {
+    @apply box-border max-w-full;
+  }
+}
+
+@layer components {
+
+  /* =========================
+    CABEÇALHO
+========================== */
+
+  .cabecalho {
+    @apply w-full p-5 shadow-sm;
+    background-color: var(--branco-principal);
+    border-bottom: 1px solid var(--verde-metalico-suave);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 50;
+  }
+
+  .cabecalho_container {
+    @apply w-full max-w-6xl mx-auto flex items-center justify-between relative;
+  }
+
+  .cabecalho_titulo {
+    @apply text-2xl font-bold;
+    color: var(--verde-metalico-principal);
+  }
+
+  .cabecalho_nav {
+    @apply flex gap-6 items-center absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .cabecalho_link {
+    @apply text-sm font-medium transition-all duration-200;
+    color: var(--texto-escuro);
+    position: relative;
+  }
+
+  .cabecalho_link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+
+    width: 0%;
+    height: 2px;
+
+    background-color: var(--verde-metalico-principal);
+    transition: width 0.25s ease;
+    box-shadow: 0 0 6px #1EC88A55;
+  }
+
+  .cabecalho_link:hover::after {
+    width: 100%;
+  }
+
+  .cabecalho_link:hover {
+    color: var(--verde-metalico-escuro);
+    text-shadow: 0 0 8px #1EC88A44;
+  }
+
+  .cabecalho_link:active {
+    transform: scale(0.96);
+  }
+
+  .cabecalho_acoes {
+    @apply flex items-center gap-4;
+  }
+
+  .cabecalho_botao_login {
+    @apply text-sm font-medium transition-all duration-200;
+    color: var(--verde-metalico-escuro);
+  }
+
+  .cabecalho_botao_login:hover {
+    color: var(--verde-metalico-principal);
+    text-shadow: 0 0 6px #1EC88A44;
+  }
+
+
+  /* ============================
+      RODAPÉ MINIMALISTA
+============================= */
+
+  .rodape-minimalista {
+    @apply w-full flex flex-col items-center gap-4 py-6 mt-20;
+    background: rgba(255, 255, 255, 0.75);
+    border-top: 1px solid var(--verde-metalico-suave);
+    backdrop-filter: blur(14px);
+    color: var(--texto-medio);
+  }
+
+  .rodape_links {
+    @apply flex gap-6;
+  }
+
+  .rodape_link {
+    @apply text-sm font-medium transition-all duration-200;
+    color: var(--texto-medio);
+    position: relative;
+  }
+
+  .rodape_link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0%;
+    height: 2px;
+    background-color: var(--verde-metalico-principal);
+    transition: width 0.25s ease;
+    box-shadow: 0 0 6px #1EC88A55;
+  }
+
+  .rodape_link:hover::after {
+    width: 100%;
+  }
+
+  .rodape_link:hover {
+    color: var(--verde-metalico-escuro);
+    text-shadow: 0 0 6px #1EC88A33;
+  }
+
+  .rodape_copy {
+    @apply text-xs text-center;
+    opacity: 0.9;
+  }
+
+
+
+  /* ============================
+      RODAPÉ - DARK MODE
+============================= */
+
+  .dark .rodape-minimalista {
+    background: rgba(10, 10, 10, 0.65);
+    border-top: 1px solid #1EC88A55;
+    color: #e5e5e5;
+  }
+
+  .dark .rodape_link {
+    color: #cfcfcf;
+  }
+
+  .dark .rodape_link:hover {
+    color: #1EC88A;
+    text-shadow: 0 0 8px #1EC88A99;
+  }
+
+  .dark .rodape_link::after {
+    background-color: #1EC88A;
+  }
+
+  .dark .rodape_copy {
+    color: #d1d1d1;
+  }
+
+  /* =============================
+        CARD NEON (VIDRO ESCURO)
+============================== */
+
+  .card-neon-horizontal {
+    @apply w-full max-w-xl p-6 rounded-2xl flex flex-col gap-3 cursor-pointer transition-all duration-300 backdrop-blur-2xl shadow-md;
+    background: rgba(20, 20, 20, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 0 10px #1EC88A33;
+  }
+
+  .card-neon-horizontal:hover {
+    transform: translateY(-4px) scale(1.02);
+    background: rgba(20, 20, 20, 0.28);
+    border-color: rgba(255, 255, 255, 0.28);
+    box-shadow:
+      0 0 18px #1EC88Aaa,
+      0 0 32px #1EC88A66,
+      inset 0 0 10px #1EC88A33;
+  }
+
+  .card-neon-title {
+    @apply text-xl font-semibold;
+    color: var(--texto-escuro);
+    text-shadow: 0 0 4px #ffffff33;
+  }
+
+  .card-neon-texto {
+    @apply text-sm leading-relaxed;
+    color: var(--texto-medio);
+  }
+
+
+  /* =========================
+        HOME / TELA PRINCIPAL
+  ========================== */
+
+  .home-container {
+    @apply flex flex-col items-center gap-10 px-6 mt-10;
+  }
+
+  .home-titulo {
+    @apply text-3xl font-bold text-center;
+    text-shadow: 0 0 4px #1ec88a22;
+    color: var(--texto-escuro);
+  }
+
+  .home-descricao {
+    @apply text-center text-base font-semibold max-w-2xl mx-auto leading-relaxed;
+    color: var(--texto-medio);
+    opacity: 0.9;
+  }
+
+  .home-cards {
+    @apply w-full max-w-5xl grid gap-8 place-items-center;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+
+  /* =========================================
+      FUNDO VIDRO + NEON SUAVE (MOVIMENTO)
+========================================= */
+
+  .bg-vidro-suave {
+    @apply fixed inset-0 w-full h-full pointer-events-none overflow-hidden;
+    z-index: -1;
+  }
+
+  .bg-vidro-suave-layer {
+    position: absolute;
+    width: 140%;
+    height: 140%;
+    filter: blur(200px);
+    opacity: 0.25;
+    border-radius: 50%;
+    animation: suaveFloat 22s ease-in-out infinite;
+  }
+
+  .s1 {
+    background: #1EC88Aaa;
+    top: -25%;
+    left: -20%;
+    animation-duration: 26s;
+  }
+
+  .s2 {
+    background: #159F7088;
+    bottom: -25%;
+    right: -20%;
+    animation-duration: 32s;
+  }
+
+  .s3 {
+    background: #8f5cf599;
+    top: 10%;
+    left: 45%;
+    opacity: 0.20;
+    animation-duration: 30s;
+  }
+
+  @keyframes suaveFloat {
+    0% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.20;
+    }
+
+    50% {
+      transform: translate(-40px, 30px) scale(1.15);
+      opacity: 0.28;
+    }
+
+    100% {
+      transform: translate(30px, -30px) scale(1.05);
+      opacity: 0.23;
+    }
+  }
+
+  /* =========================
+      TEMA ESCURO
+========================= */
+  .dark body {
+    background: #0f0f0f;
+    color: #e7e7e7;
+  }
+
+  .dark .cabecalho {
+    background: rgba(15, 15, 15, 0.85);
+    border-bottom: 1px solid #1EC88A55;
+    backdrop-filter: blur(16px);
+  }
+
+  .dark .cabecalho_link {
+    color: #e5e5e5;
+  }
+
+  .dark .cabecalho_link:hover {
+    color: #1EC88A;
+  }
+
+  .dark .card-neon-horizontal {
+    background: rgba(20, 20, 20, 0.35);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .dark .card-neon-horizontal:hover {
+    background: rgba(20, 20, 20, 0.45);
+  }
+
+  .dark .card-neon-title {
+    color: #e5e5e5;
+    text-shadow: 0 0 6px #1EC88A44;
+  }
+
+  .dark .card-neon-texto {
+    color: #d0d0d0;
+  }
+
+  .dark .home-titulo {
+    color: #e5e5e5;
+    text-shadow: 0 0 6px #1ec88a33;
+  }
+
+  .dark .home-descricao {
+    color: #cccccc;
+    opacity: 0.9;
+  }
+
+  /* =========================
+      ERRO - PÁGINA
+========================= */
+
+  .erro-container {
+    @apply flex flex-col items-center justify-center text-center px-6 mt-10;
+    min-height: 70vh;
+    position: relative;
+  }
+
+  .erro-card {
+    @apply max-w-xl p-10 rounded-2xl flex flex-col items-center gap-6 backdrop-blur-2xl shadow-lg;
+
+    /* vidro embaçado claro */
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+
+    /* neon suave */
+    box-shadow: 0 0 14px #1ec88a55;
+    animation: erroFade 0.6s ease-out;
+  }
+
+  .erro-titulo {
+    @apply text-3xl font-bold;
+    color: var(--texto-escuro);
+  }
+
+  .erro-texto {
+    @apply text-base leading-relaxed;
+    color: var(--texto-medio);
+    max-width: 400px;
+  }
+
+  /* botão */
+  .erro-botao {
+    @apply px-6 py-3 rounded-xl font-semibold transition-all duration-300;
+    background-color: var(--verde-metalico-principal);
+    color: white;
+    box-shadow: 0 0 10px #1ec88a88;
+  }
+
+  .erro-botao:hover {
+    background-color: var(--verde-metalico-escuro);
+    box-shadow: 0 0 16px #1ec88a;
+    transform: translateY(-2px);
+  }
+
+  /* animação */
+  @keyframes erroFade {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* =========================
+      DARK MODE
+========================= */
+
+  .dark .erro-card {
+    background: rgba(15, 15, 15, 0.45);
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+
+  .dark .erro-titulo {
+    color: #e5e5e5;
+  }
+
+  .dark .erro-texto {
+    color: #cccccc;
+  }
+
+  .dark .erro-botao {
+    background-color: #1ec88a;
+    color: #0f0f0f;
   }
 }

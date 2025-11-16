@@ -1,68 +1,104 @@
+@import "tailwindcss";
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --verde-metalico-principal: #1EC88A;
+  --verde-metalico-escuro: #159F70;
+  --branco-principal: #FFFFFF;
+  --verde-metalico-translucido: #1EC88A4D;
+  --cinza-claro: #F5F5F5;
+  --cinza-medio: #E5E7EB;
+  --cinza-escuro: #374151;
+  --sombra-padrao: rgba(0, 0, 0, 0.1);
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  --fonte: "Roboto", sans-serif;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  @apply flex flex-col min-h-screen m-0 p-0;
+  font-family: var(--fonte)
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@layer base {
+  .container {
+    @apply h-screen w-full flex flex-col;
   }
-  a:hover {
-    color: #747bff;
+
+  .container header {
+    @apply h-[20vh] w-screen border-b flex flex-row items-center justify-between p-5;
   }
-  button {
-    background-color: #f9f9f9;
+
+  .container header h1 {
+    @apply text-3xl font-bold;
+  }
+
+  .container header nav {
+    @apply flex gap-5;
+  }
+
+  .container header nav a {
+    @apply hover:underline;
+  }
+
+  .container main {
+    @apply h-[60vh] w-screen overflow-auto bg-[var(--cinza-claro)];
+  }
+
+  .container footer {
+    @apply h-[20vh] w-screen border-b flex flex-col items-center justify-end p-5;
+  }
+}
+
+@layer components {
+
+  /* =========================
+      CABEÇALHO
+  ========================== */
+  .cabecalho {
+    @apply flex items-center justify-between;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 50;
+    border: none;
+  }
+
+  .cabecalho_logo {
+    @apply flex flex-col;
+  }
+
+  .cabecalho_logo h1 {
+    @apply text-2xl font-bold;
+    color: var(--verde-metalico-principal);
+  }
+
+  .cabecalho_logo p {
+    @apply mt-[0.25rem] text-[0.875rem];
+    color: var(--cinza-escuro);
+  }
+
+  /* =========================
+      RODAPÉ
+  ========================== */
+  .rodape {
+    @apply bg-[var(--cinza-medio)] text-[var(--cinza-escuro)] shadow-inner;
+  }
+
+  .rodape-conteudo {
+    @apply container px-6 py-4 flex flex-col items-center justify-center gap-2;
+  }
+
+  .rodape-texto {
+    @apply text-sm;
+  }
+
+  .rodape-links {
+    @apply flex gap-4 text-sm;
+  }
+
+  .rodape-link {
+    @apply hover:underline;
   }
 }

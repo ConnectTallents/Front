@@ -375,4 +375,86 @@
     color: #cccccc;
     opacity: 0.9;
   }
+
+  /* =========================
+      ERRO - PÁGINA
+========================= */
+
+  .erro-container {
+    @apply flex flex-col items-center justify-center text-center px-6 mt-10;
+    min-height: 70vh;
+    position: relative;
+  }
+
+  .erro-card {
+    @apply max-w-xl p-10 rounded-2xl flex flex-col items-center gap-6 backdrop-blur-2xl shadow-lg;
+
+    /* vidro embaçado claro */
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+
+    /* neon suave */
+    box-shadow: 0 0 14px #1ec88a55;
+    animation: erroFade 0.6s ease-out;
+  }
+
+  .erro-titulo {
+    @apply text-3xl font-bold;
+    color: var(--texto-escuro);
+  }
+
+  .erro-texto {
+    @apply text-base leading-relaxed;
+    color: var(--texto-medio);
+    max-width: 400px;
+  }
+
+  /* botão */
+  .erro-botao {
+    @apply px-6 py-3 rounded-xl font-semibold transition-all duration-300;
+    background-color: var(--verde-metalico-principal);
+    color: white;
+    box-shadow: 0 0 10px #1ec88a88;
+  }
+
+  .erro-botao:hover {
+    background-color: var(--verde-metalico-escuro);
+    box-shadow: 0 0 16px #1ec88a;
+    transform: translateY(-2px);
+  }
+
+  /* animação */
+  @keyframes erroFade {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* =========================
+      DARK MODE
+========================= */
+
+  .dark .erro-card {
+    background: rgba(15, 15, 15, 0.45);
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+
+  .dark .erro-titulo {
+    color: #e5e5e5;
+  }
+
+  .dark .erro-texto {
+    color: #cccccc;
+  }
+
+  .dark .erro-botao {
+    background-color: #1ec88a;
+    color: #0f0f0f;
+  }
 }

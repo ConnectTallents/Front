@@ -3,6 +3,7 @@ import App from "../App";
 import Home from "../pages/Home";
 import Error from "../pages/Error";
 import Integrantes from "../pages/Integrantes";
+import Sobre from "../pages/Sobre";
 
 export const routes = createBrowserRouter([
     {
@@ -13,10 +14,16 @@ export const routes = createBrowserRouter([
             {
                 path: "/",
                 element: <Home />
-            },
+            }
+            ,
             {
                 path: "/integrantes",
                 element: <Integrantes />
+            }
+            ,
+            {
+                path: "/sobre",
+                element: <Sobre />
             }
         ]
     }

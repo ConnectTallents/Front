@@ -300,29 +300,35 @@
     color: #1EC88A;
   }
 
-  /* =========================
-   CARD NEON — DARK MODE
-========================= */
+  /* ===========================
+      CARD - DARK MODE 
+=========================== */
+
   .dark .card-neon-horizontal {
-    background: rgba(20, 20, 20, 0.35);
-    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(20, 20, 20, 0.32);
+    border-color: rgba(255, 255, 255, 0.10);
+
+    /* sem glow no normal */
+    box-shadow: none;
+    transition: 0.3s ease;
+  }
+
+  .dark .card-neon-horizontal:hover {
+    background: rgba(20, 20, 20, 0.40);
+
     box-shadow:
-      0 0 12px #1EC88A55,
-      inset 0 0 10px #1EC88A33;
+      0 0 25px #1ec88a66,
+      0 0 45px #1ec88a44,
+      inset 0 0 15px #1ec88a33;
   }
 
   .dark .card-neon-title {
-    color: #e8e8e8;
+    color: #eaeaea;
+    text-shadow: 0 0 4px #1ec88a55;
   }
 
   .dark .card-neon-texto {
-    color: #d4d4d4;
-  }
-
-  .dark .card-neon-icone {
-    background: rgba(30, 200, 138, 0.12);
-    border-color: rgba(30, 200, 138, 0.45);
-    color: #18ffb0;
+    color: #cfcfcf;
   }
 
 

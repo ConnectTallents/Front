@@ -1,7 +1,12 @@
 // src/components/ExperienciaCard/ExperienciaCard.tsx
+import { Mensagem, Usuario, Avaliacao } from "../../types/Dominio";
+
+type Experiencia = Mensagem & { 
+    usuario?: Usuario | null; 
+    avaliacao?: Avaliacao | null};
 
 type Props = {
-    experiencia: any;
+    experiencia: Experiencia;
 };
 
 export default function CardExperiencia({ experiencia }: Props) {

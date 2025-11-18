@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { endpoints } from "../../services/endpoint";
+import { Tarefa } from "../../types/Dominio";
 
 import BackgroundNeon from "../../components/Background/Background";
 import CardTrilha from "../../components/CardTrilha/CardTrilha";
@@ -15,7 +16,7 @@ const trilhas = [
 
 export default function Preparacao() {
 
-    const [tarefas, setTarefas] = useState<any[]>([]);
+    const [tarefas, setTarefas] = useState<Tarefa[]>([]);
     const [carregando, setCarregando] = useState(true);
 
     const [filtroArea, setFiltroArea] = useState<string>("TODAS");

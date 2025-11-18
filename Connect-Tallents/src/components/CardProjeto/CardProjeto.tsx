@@ -1,5 +1,11 @@
+import { Projeto } from "../../types/Dominio";
 
-export default function CardProjeto({ projeto, onVerDetalhes }: any) {
+type Props = {
+    projeto: Projeto;
+    onVerDetalhes: (projeto: Projeto) => void;
+}
+
+export default function CardProjeto({ projeto, onVerDetalhes }: Props) {
     return (
         <div className="projeto-card">
             <div className="projeto-header">

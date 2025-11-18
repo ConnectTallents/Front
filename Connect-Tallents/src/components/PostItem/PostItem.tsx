@@ -1,7 +1,8 @@
 import { FiThumbsUp, FiMessageCircle, FiShare2 } from "react-icons/fi";
+import { Mensagem } from "../../types/Dominio";
 
 type PostItemProps = {
-    post: any;
+    post: Mensagem;
 };
 
 export default function PostItem({ post }: PostItemProps) {

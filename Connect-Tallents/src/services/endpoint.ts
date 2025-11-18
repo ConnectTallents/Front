@@ -1,17 +1,16 @@
 import { api } from "./api";
+import { Usuario, Projeto, Tarefa, Mensagem, Avaliacao, Colaboracao } from "../types/Dominio";
 
 export const endpoints = {
-    // === LISTAGENS ===
-    listarUsuarios: () => api.get("/usuarios"),
-    listarProjetos: () => api.get("/projetos"),
-    listarTarefas: () => api.get("/tarefas"),
-    listarMensagens: () => api.get("/mensagens"),
-    listarAvaliacoes: () => api.get("/avaliacoes"),
-    listarColaboracoes: () => api.get("/colaboracoes"), 
+    listarUsuarios: () => api.get<Usuario[]>("/usuarios"),
+    listarProjetos: () => api.get<Projeto[]>("/projetos"),
+    listarTarefas: () => api.get<Tarefa[]>("/tarefas"),
+    listarMensagens: () => api.get<Mensagem[]>("/mensagens"),
+    listarAvaliacoes: () => api.get<Avaliacao[]>("/avaliacoes"),
+    listarColaboracoes: () => api.get<Colaboracao[]>("/colaboracoes"),
 
-    // === CRIAÇÃO ===
-    criarUsuario: (data: any) => api.post("/usuarios", data),
-    criarProjeto: (data: any) => api.post("/projetos", data),
-    criarMensagem: (data: any) => api.post("/mensagens", data),
-    criarColaboracao: (data: any) => api.post("/colaboracoes", data), 
+    criarUsuario: (data: Partial<Usuario>) => api.post<Usuario>("/usuarios", data),
+    criarProjeto: (data: Partial<Projeto>) => api.post<Projeto>("/projetos", data),
+    criarMensagem: (data: Partial<Mensagem>) => api.post<Mensagem>("/mensagens", data),
+    criarColaboracao: (data: Partial<Colaboracao>) => api.post<Colaboracao>("/colaboracoes", data),
 };

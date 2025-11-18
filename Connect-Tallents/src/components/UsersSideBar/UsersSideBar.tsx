@@ -1,9 +1,15 @@
-export default function UsersSideBar({ usuarios }: any) {
+import { Usuario } from "../../types/Dominio";
+
+type Props = {
+    usuario: Usuario[]
+};
+
+export default function UsersSideBar({ usuario }: Props) {
     return (
         <aside className="usuarios-sidebar">
             <h3>Conectados</h3>
 
-            {usuarios.map((u: any) => (
+            {usuario.map((u) => (
                 <div key={u.codigo} className="usuarios-item">
                     <img
                         src={`https://api.dicebear.com/8.x/adventurer/svg?seed=${u.nome}`}

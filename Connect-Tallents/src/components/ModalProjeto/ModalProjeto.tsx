@@ -1,7 +1,9 @@
+import { Projeto, Tarefa } from "../../types/Dominio";
+
 type ProjetoModalProps = {
     open: boolean;
-    projeto: any | null;
-    tarefas: any[];
+    projeto: Projeto | null;
+    tarefas: Tarefa[];
     onClose: () => void;
 };
 

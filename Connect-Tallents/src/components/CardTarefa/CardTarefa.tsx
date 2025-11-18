@@ -1,5 +1,7 @@
+import { Tarefa } from "../../types/Dominio";
+
 type Props = {
-    tarefa: any;
+    tarefa: Tarefa;
 };
 
 export default function CardTarefa({ tarefa }: Props) {

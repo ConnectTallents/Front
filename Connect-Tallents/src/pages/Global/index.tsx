@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { endpoints } from "../../services/endpoint";
+import { Usuario, Mensagem } from "../../types/Dominio";
 
 import BackgroundNeon from "../../components/Background/Background";
 import PostCriar from "../../components/PostCriar/PostCriar";
@@ -9,15 +10,15 @@ import PostCarregamento from "../../components/Carregamento/Carregamento";
 import Tendencias from "../../components/Tendencias/Tendencias";
 
 export default function Global() {
-    const [usuarios, setUsuarios] = useState<any[]>([]);
-    const [posts, setPosts] = useState<any[]>([]);
+    const [usuarios, setUsuarios] = useState<Usuario[]>([]);
+    const [posts, setPosts] = useState<Mensagem[]>([]);
     const [carregando, setCarregando] = useState(true);
 
     // === CRIAR POST ===
     async function criarPost(conteudo: string) {
         const novo = await endpoints.criarMensagem({
             conteudo,
-            codigoUsuario: 1, // * alterar depois para usuário logado
+            idUsuario: 1, // * alterar depois para usuário logado
             dataEnvio: new Date().toISOString()
         });
 
@@ -35,14 +36,14 @@ export default function Global() {
 
                 setUsuarios(usuariosData);
 
-                const mapaUsuarios: Record<number, any> = {};
-                usuariosData.forEach((u: any) => {
+                const mapaUsuarios: Record<number, Usuario> = {};
+                usuariosData.forEach((u) => {
                     mapaUsuarios[u.codigo] = u;
                 });
 
-                const mensagensComNomes = mensagensData.map((msg: any) => ({
+                const mensagensComNomes = mensagensData.map((msg) => ({
                     ...msg,
-                    usuario: mapaUsuarios[msg.idUsuario] || null
+                    usuario: mapaUsuarios[msg.idUsuario] || null,
                 }));
 
                 setPosts(mensagensComNomes);
@@ -66,7 +67,7 @@ export default function Global() {
 
             <div className="global-layout">
 
-                <UsersSideBar usuarios={usuarios} />
+                <UsersSideBar usuario={usuarios} />
 
                 <div className="global-feed">
                     <PostCriar onPostar={criarPost} />

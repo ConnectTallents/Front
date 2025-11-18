@@ -5,7 +5,7 @@ import BackgroundNeon from "../../components/Background/Background";
 import PostCriar from "../../components/PostCriar/PostCriar";
 import PostItem from "../../components/PostItem/PostItem";
 import UsersSideBar from "../../components/UsersSideBar/UsersSideBar";
-import PostCarregamento from "../../components/PostCarregamento/PostCarregamento";
+import PostCarregamento from "../../components/Carregamento/Carregamento";
 import Tendencias from "../../components/Tendencias/Tendencias";
 
 export default function Global() {
@@ -33,6 +33,8 @@ export default function Global() {
                 const mensagensData = await endpoints.listarMensagens();
                 const usuariosData = await endpoints.listarUsuarios();
 
+                setUsuarios(usuariosData);
+
                 const mapaUsuarios: Record<number, any> = {};
                 usuariosData.forEach((u: any) => {
                     mapaUsuarios[u.codigo] = u;
@@ -44,6 +46,7 @@ export default function Global() {
                 }));
 
                 setPosts(mensagensComNomes);
+
             } catch (error) {
                 console.error("Erro ao carregar dados:", error);
             } finally {

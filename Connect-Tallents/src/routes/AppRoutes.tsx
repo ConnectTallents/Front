@@ -6,6 +6,7 @@ import Integrantes from "../pages/Integrantes";
 import Sobre from "../pages/Sobre";
 import Contato from "../pages/Contato";
 import Global from "../pages/Global";
+import Colaboracao from "../pages/Colaboracao";
 
 export const routes = createBrowserRouter([
     {
@@ -36,6 +37,11 @@ export const routes = createBrowserRouter([
             {
                 path: "/global",
                 element: <Global />
+            }
+            ,
+            {
+                path: "/colaboracao",
+                element: <Colaboracao />
             }
         ]
     }

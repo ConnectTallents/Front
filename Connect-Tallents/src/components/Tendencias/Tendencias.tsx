@@ -1,5 +1,5 @@
 import { FiTrendingUp, FiGlobe, FiUsers, FiTarget } from "react-icons/fi";
-
+import { Link } from "react-router-dom";
 export default function Tendencias() {
     return (
         <aside className="global-tendencias">
@@ -12,12 +12,12 @@ export default function Tendencias() {
 
             <div className="tendencia-item">
                 <FiUsers className="tendencia-icon" />
-                Projetos Ativos
+                <Link to="/colaboracao">Projetos Ativos</Link>
             </div>
 
             <div className="tendencia-item">
                 <FiGlobe className="tendencia-icon" />
-                Conexões Internacionais
+                <Link to="/global">Conexões Internacionais</Link>
             </div>
 
             <div className="tendencia-item">

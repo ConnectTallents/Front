@@ -1216,5 +1216,191 @@
     @apply flex flex-col gap-3 mt-4;
   }
 
+  /* ============================
+      PROJETOS
+============================ */
 
+  .projeto-card {
+    @apply w-full p-6 rounded-2xl backdrop-blur-xl mb-6 transition-all;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(30, 200, 138, 0.25);
+    box-shadow: 0 0 18px rgba(30, 200, 138, 0.10);
+  }
+
+  .projeto-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 25px rgba(30, 200, 138, 0.25);
+  }
+
+  .dark .projeto-card {
+    background: rgba(20, 20, 20, 0.45);
+    border-color: rgba(30, 200, 138, 0.35);
+    box-shadow: 0 0 20px rgba(30, 200, 138, 0.15);
+  }
+
+  .projeto-header {
+    @apply mb-2;
+  }
+
+  .projeto-nome {
+    @apply text-xl font-semibold;
+    color: var(--texto-escuro);
+  }
+
+  .dark .projeto-nome {
+    color: #e7e7e7;
+  }
+
+  .projeto-categoria {
+    @apply text-sm opacity-70;
+  }
+
+  .projeto-descricao {
+    @apply mt-3 text-sm leading-relaxed;
+  }
+
+  .dark .projeto-descricao {
+    color: #d5d5d5;
+  }
+
+  .projeto-infos {
+    @apply flex gap-4 text-sm mt-4 opacity-80;
+  }
+
+  .projeto-btn {
+    @apply mt-4 px-4 py-2 rounded-xl font-semibold text-sm transition-all;
+    background: var(--verde-metalico-principal);
+    color: white;
+  }
+
+  .projeto-btn:hover {
+    background: var(--verde-metalico-escuro);
+  }
+
+  /* ============================
+   FEED DE PROJETOS (COLABORAÇÃO)
+============================ */
+
+  .colab-feed {
+    @apply flex flex-col gap-6;
+  }
+
+  /* Card principal */
+  .projeto-card {
+    @apply p-5 rounded-2xl flex flex-col gap-4 backdrop-blur-xl transition-all border;
+
+    background: rgba(255, 255, 255, 0.45);
+    border-color: rgba(30, 200, 138, 0.25);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.08);
+  }
+
+  .projeto-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 30px rgba(30, 200, 138, 0.3);
+  }
+
+  /* Header */
+  .projeto-header {
+    @apply flex flex-col gap-1;
+  }
+
+  .projeto-nome {
+    @apply text-xl font-semibold;
+    color: var(--texto-escuro);
+  }
+
+  .projeto-info {
+    @apply text-sm;
+    color: var(--texto-medio);
+  }
+
+  .projeto-funcao {
+    @apply text-sm font-medium;
+    color: var(--verde-metalico-principal);
+  }
+
+  /* Botão */
+  .btn-detalhes {
+    @apply px-4 py-2 rounded-xl font-semibold text-white text-sm transition-all;
+    background: var(--verde-metalico-principal);
+  }
+
+  .btn-detalhes:hover {
+    background: var(--verde-metalico-escuro);
+  }
+
+  /* ============================
+   DARK MODE
+============================ */
+
+  .dark .projeto-card {
+    background: rgba(20, 20, 20, 0.45);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 25px rgba(30, 200, 138, 0.12);
+  }
+
+  .dark .projeto-nome {
+    color: #e5e5e5;
+  }
+
+  .dark .projeto-info {
+    color: #bbb;
+  }
+
+  .dark .projeto-funcao {
+    color: #1ec88a;
+  }
+
+  /* ================================
+      MODAL DE PROJETO
+================================ */
+
+  .modal-overlay {
+    @apply fixed inset-0 bg-black/60 flex items-center justify-center z-[999];
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-card {
+    @apply w-full max-w-lg bg-white rounded-2xl p-6 shadow-xl flex flex-col gap-4;
+  }
+
+  .dark .modal-card {
+    background: rgba(20, 20, 20, 0.92);
+    border: 1px solid #1ec88a55;
+  }
+
+  .modal-titulo {
+    @apply text-2xl font-bold;
+    color: var(--texto-escuro);
+  }
+
+  .dark .modal-titulo {
+    color: #e5e5e5;
+  }
+
+  .modal-sub {
+    @apply text-sm opacity-80;
+  }
+
+  .modal-sec-titulo {
+    @apply text-lg font-semibold mt-4;
+  }
+
+  .modal-vazio {
+    @apply text-sm opacity-70;
+  }
+
+  .tarefa-item {
+    @apply p-3 rounded-xl border bg-white/40 mb-2;
+  }
+
+  .dark .tarefa-item {
+    background: rgba(20, 20, 20, 0.5);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .modal-fechar {
+    @apply mt-4 px-4 py-2 rounded-xl font-semibold bg-[#1EC88A] text-white;
+  }
+  
 }

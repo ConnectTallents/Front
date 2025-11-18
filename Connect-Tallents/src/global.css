@@ -1402,5 +1402,150 @@
   .modal-fechar {
     @apply mt-4 px-4 py-2 rounded-xl font-semibold bg-[#1EC88A] text-white;
   }
-  
+
+  /* =============================
+      EXPERIÊNCIA - FEED
+============================= */
+
+  .experiencia-feed {
+    @apply flex flex-col gap-6;
+  }
+
+  /* =============================
+      CRIAR EXPERIÊNCIA
+============================= */
+
+  .post-criar {
+    @apply p-5 rounded-2xl mb-6 backdrop-blur-xl;
+    background: rgba(255, 255, 255, 0.45);
+    border: 1px solid #1ec88a22;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.06);
+  }
+
+  .post-criar-input {
+    @apply w-full h-32 p-3 rounded-xl outline-none resize-none text-sm;
+    background: rgba(255, 255, 255, 0.6);
+    color: var(--texto-escuro);
+  }
+
+  .post-criar-btn {
+    @apply mt-3 px-4 py-2 rounded-xl font-semibold cursor-pointer transition-all;
+    background: var(--verde-metalico-principal);
+    color: white;
+  }
+
+  .post-criar-btn:hover {
+    box-shadow: 0 0 10px #1ec88a88;
+    transform: translateY(-2px);
+  }
+
+  .dark .post-criar {
+    background: rgba(20, 20, 20, 0.4);
+    border-color: #1ec88a55;
+  }
+
+  .dark .post-criar-input {
+    background: rgba(20, 20, 20, 0.5);
+    color: #eee;
+  }
+
+  /* =============================
+      CARD DE EXPERIÊNCIA
+============================= */
+
+  .experiencia-card {
+    @apply w-full rounded-2xl p-5 flex flex-col gap-4 transition-all backdrop-blur-xl;
+    background: rgba(255, 255, 255, 0.48);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 0 28px rgba(0, 0, 0, 0.06);
+  }
+
+  .experiencia-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 30px rgba(30, 200, 138, 0.25);
+  }
+
+  /* HEADER */
+  .experiencia-header {
+    @apply flex items-center gap-4;
+  }
+
+  .experiencia-avatar {
+    @apply w-14 h-14 rounded-full object-cover border;
+    border-color: rgba(30, 200, 138, 0.45);
+  }
+
+  .experiencia-header-info {
+    @apply flex flex-col;
+  }
+
+  .experiencia-user-name {
+    @apply font-semibold text-lg;
+    color: var(--texto-escuro);
+  }
+
+  .experiencia-user-details {
+    @apply text-sm;
+    color: var(--texto-medio);
+  }
+
+  .experiencia-date {
+    @apply text-xs;
+    color: #888;
+  }
+
+  /* CONTEÚDO */
+  .experiencia-content {
+    @apply text-[15px] leading-relaxed;
+    color: var(--texto-escuro);
+  }
+
+  /* =============================
+      AVALIAÇÃO (STARS + TEXTO)
+============================= */
+
+  .experiencia-avaliacao {
+    @apply mt-3 p-3 rounded-xl transition-all;
+    background: rgba(30, 200, 138, 0.12);
+    border: 1px solid rgba(30, 200, 138, 0.35);
+  }
+
+  .experiencia-avaliacao .nota {
+    @apply font-semibold text-lg;
+    color: #f4cb42;
+  }
+
+  .experiencia-avaliacao p {
+    @apply text-sm mt-1;
+    color: var(--texto-medio);
+  }
+
+  /* =============================
+      DARK MODE
+============================= */
+
+  .dark .experiencia-card {
+    background: rgba(20, 20, 20, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 20px rgba(30, 200, 138, 0.1);
+  }
+
+  .dark .experiencia-user-name,
+  .dark .experiencia-content {
+    color: #e5e5e5;
+  }
+
+  .dark .experiencia-user-details {
+    color: #cfcfcf;
+  }
+
+  .dark .experiencia-avaliacao {
+    background: rgba(30, 200, 138, 0.18);
+    border-color: #1ec88a55;
+  }
+
+  .dark .experiencia-avaliacao .nota {
+    color: #ffe27a;
+  }
+
 }

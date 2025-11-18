@@ -7,6 +7,7 @@ import Sobre from "../pages/Sobre";
 import Contato from "../pages/Contato";
 import Global from "../pages/Global";
 import Colaboracao from "../pages/Colaboracao";
+import Experiencia from "../pages/Experiencia";
 
 export const routes = createBrowserRouter([
     {
@@ -42,6 +43,11 @@ export const routes = createBrowserRouter([
             {
                 path: "/colaboracao",
                 element: <Colaboracao />
+            }
+            ,
+            {
+                path: "/experiencia",
+                element: <Experiencia />
             }
         ]
     }

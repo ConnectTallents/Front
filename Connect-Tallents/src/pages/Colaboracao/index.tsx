@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { endpoints } from "../../services/endpoint";
-import { Usuario, Colaboracao } from "../../services/connect";
+import { Usuario, Projeto, Tarefa, Colaboracao } from "../../types/Dominio";
 
 import UsersSideBar from "../../components/UsersSideBar/UsersSideBar";
 import Tendencias from "../../components/Tendencias/Tendencias";
@@ -11,37 +11,34 @@ import ProjetoModal from "../../components/ModalProjeto/ModalProjeto";
 
 export default function Colaboracao() {
     const [usuarios, setUsuarios] = useState<Usuario[]>([]);
-    const [projetos, setProjetos] = useState<any[]>([]);
-    const [tarefas, setTarefas] = useState<any[]>([]);
+    const [projetos, setProjetos] = useState<Projeto[]>([]);
+    const [tarefas, setTarefas] = useState<Tarefa[]>([]);
 
     const [carregando, setCarregando] = useState(true);
 
-    // === MODAL ===
     const [modalAberto, setModalAberto] = useState(false);
-    const [projetoSelecionado, setProjetoSelecionado] = useState<any | null>(null);
+    const [projetoSelecionado, setProjetoSelecionado] = useState<Projeto | null>(null);
 
-    // === ABRIR MODAL ===
-    async function abrirDetalhes(projeto: any) {
+    async function abrirDetalhes(projeto: Projeto) {
         setProjetoSelecionado(projeto);
         setModalAberto(true);
 
         const listaTarefas = await endpoints.listarTarefas();
         const tarefasDoProjeto = listaTarefas.filter(
-            (t: any) => t.codigoProjeto === projeto.codigo
+            (t) => t.codigoProjeto === projeto.codigo
         );
 
         setTarefas(tarefasDoProjeto);
     }
 
-    // === CARREGAR DADOS ===
     useEffect(() => {
         async function carregar() {
             try {
                 setCarregando(true);
 
-                const listaUsuarios = await endpoints.listarUsuarios() as Usuario[];
+                const listaUsuarios = await endpoints.listarUsuarios();
                 const listaProjetos = await endpoints.listarProjetos();
-                const listaColab = await endpoints.listarColaboracoes() as Colaboracao[];
+                const listaColab = await endpoints.listarColaboracoes();
 
                 setUsuarios(listaUsuarios);
 
@@ -55,7 +52,7 @@ export default function Colaboracao() {
                     mapaColab[c.idProjeto] = c;
                 });
                 
-                const projetosFormatados = listaProjetos.map((proj: any) => ({
+                const projetosFormatados = listaProjetos.map((proj) => ({
                     ...proj,
                     usuario: mapaUsuarios[proj.codigoUsuario] || null,
                     colaboracao: mapaColab[proj.codigo] || null
@@ -79,10 +76,8 @@ export default function Colaboracao() {
 
             <div className="global-layout">
 
-                {/* SIDEBAR */}
-                <UsersSideBar usuarios={usuarios} />
+                <UsersSideBar usuario={usuarios} />
 
-                {/* FEED DE PROJETOS */}
                 <div className="colab-feed">
                     {carregando ? (
                         <>
@@ -101,11 +96,9 @@ export default function Colaboracao() {
                     )}
                 </div>
 
-                {/* TENDÊNCIAS */}
                 <Tendencias />
             </div>
 
-            {/* MODAL */}
             <ProjetoModal
                 open={modalAberto}
                 projeto={projetoSelecionado}

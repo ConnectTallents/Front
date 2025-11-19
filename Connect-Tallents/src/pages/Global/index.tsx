@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { endpoints } from "../../services/endpoint";
+import { Usuario, MensagemComUsuario } from "../../types/Dominio";
 
 import BackgroundNeon from "../../components/Background/Background";
 import PostCriar from "../../components/PostCriar/PostCriar";
@@ -8,23 +9,47 @@ import UsersSideBar from "../../components/UsersSideBar/UsersSideBar";
 import PostCarregamento from "../../components/Carregamento/Carregamento";
 import Tendencias from "../../components/Tendencias/Tendencias";
 
+import { useAuth } from "../../context/AuthContext";
+
 export default function Global() {
-    const [usuarios, setUsuarios] = useState<any[]>([]);
-    const [posts, setPosts] = useState<any[]>([]);
+
+    const { usuario } = useAuth(); 
+    const [usuarios, setUsuarios] = useState<Usuario[]>([]);
+    const [posts, setPosts] = useState<MensagemComUsuario[]>([]);
     const [carregando, setCarregando] = useState(true);
 
-    // === CRIAR POST ===
     async function criarPost(conteudo: string) {
-        const novo = await endpoints.criarMensagem({
-            conteudo,
-            codigoUsuario: 1, // * alterar depois para usuário logado
-            dataEnvio: new Date().toISOString()
-        });
+        if (!usuario) {
+            alert("Você precisa estar logado para postar.");
+            return;
+        }
 
-        setPosts([novo, ...posts]);
+        try {
+            const novo = await endpoints.criarMensagem({
+                conteudo,
+                dataEnvio: new Date().toISOString(),
+                idUsuario: usuario.id,   
+                idProjeto: 9            
+            });
+            const postComUsuario: MensagemComUsuario = {
+                ...novo,
+                usuario: {
+                    codigo: usuario.id,
+                    nome: usuario.nome,
+                    email: usuario.email,
+                    foto: usuario.foto ?? ""
+                }
+            };
+
+
+
+            setPosts((prev) => [postComUsuario, ...prev]);
+
+        } catch (err) {
+            console.error("ERRO AO CRIAR POST:", err);
+        }
     }
 
-    // === CARREGAR TUDO ===
     useEffect(() => {
         async function carregarTudo() {
             try {
@@ -35,18 +60,17 @@ export default function Global() {
 
                 setUsuarios(usuariosData);
 
-                const mapaUsuarios: Record<number, any> = {};
-                usuariosData.forEach((u: any) => {
+                const mapaUsuarios: Record<number, Usuario> = {};
+                usuariosData.forEach((u) => {
                     mapaUsuarios[u.codigo] = u;
                 });
 
-                const mensagensComNomes = mensagensData.map((msg: any) => ({
+                const mensagensComNomes = mensagensData.map((msg) => ({
                     ...msg,
-                    usuario: mapaUsuarios[msg.idUsuario] || null
+                    usuario: mapaUsuarios[msg.idUsuario] || null,
                 }));
 
                 setPosts(mensagensComNomes);
-
             } catch (error) {
                 console.error("Erro ao carregar dados:", error);
             } finally {
@@ -57,7 +81,6 @@ export default function Global() {
         carregarTudo();
     }, []);
 
-
     return (
         <main className="global-container">
             <BackgroundNeon />
@@ -66,7 +89,7 @@ export default function Global() {
 
             <div className="global-layout">
 
-                <UsersSideBar usuarios={usuarios} />
+                <UsersSideBar usuario={usuarios} />
 
                 <div className="global-feed">
                     <PostCriar onPostar={criarPost} />
@@ -79,7 +102,20 @@ export default function Global() {
                         </>
                     ) : (
                         posts.map((p) => (
-                            <PostItem key={p.codigo} post={p} />
+                            <PostItem
+                                key={p.codigo}
+                                post={p}
+                                podeExcluir={usuario?.id === p.idUsuario}
+                                onExcluir={async (id) => {
+                                    try {
+                                        await endpoints.deletarMensagem(id);
+                                        setPosts((prev) => prev.filter((post) => post.codigo !== id));
+                                    } catch (error) {
+                                        console.error("Erro ao deletar post:", error);
+                                        alert("Não foi possível excluir o post.");
+                                    }
+                                }}
+                            />
                         ))
                     )}
                 </div>

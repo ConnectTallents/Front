@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { endpoints } from "../../services/endpoint";
+import { Tarefa } from "../../types/Dominio";
 
 import BackgroundNeon from "../../components/Background/Background";
 import CardTrilha from "../../components/CardTrilha/CardTrilha";
@@ -15,7 +16,7 @@ const trilhas = [
 
 export default function Preparacao() {
 
-    const [tarefas, setTarefas] = useState<any[]>([]);
+    const [tarefas, setTarefas] = useState<Tarefa[]>([]);
     const [carregando, setCarregando] = useState(true);
 
     const [filtroArea, setFiltroArea] = useState<string>("TODAS");
@@ -43,14 +44,12 @@ export default function Preparacao() {
 
             <h1 className="global-titulo">Preparação Profissional</h1>
 
-            {/* → TRILHAS */}
             <section className="prep-trilhas">
                 {trilhas.map((t, i) => (
                     <CardTrilha key={i} titulo={t.titulo} desc={t.desc} />
                 ))}
             </section>
 
-            {/* → FILTRO */}
             <div className="prep-filtros">
                 <button className={filtroArea === "TODAS" ? "ativo" : ""} onClick={() => setFiltroArea("TODAS")}>Todas</button>
                 <button className={filtroArea === "Back-End" ? "ativo" : ""} onClick={() => setFiltroArea("Back-End")}>Back-End</button>
@@ -58,7 +57,6 @@ export default function Preparacao() {
                 <button className={filtroArea === "Soft Skills" ? "ativo" : ""} onClick={() => setFiltroArea("Soft Skills")}>Soft Skills</button>
             </div>
 
-            {/* → LISTA DE TAREFAS */}
             <section className="prep-tarefas">
 
                 {carregando && (

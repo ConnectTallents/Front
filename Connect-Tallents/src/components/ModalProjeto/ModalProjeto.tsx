@@ -1,7 +1,9 @@
+import { Projeto, Tarefa } from "../../types/Dominio";
+
 type ProjetoModalProps = {
     open: boolean;
-    projeto: any | null;
-    tarefas: any[];
+    projeto: Projeto | null;
+    tarefas: Tarefa[];
     onClose: () => void;
 };
 
@@ -17,13 +19,11 @@ export default function ProjetoModal({
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal-card" onClick={(e) => e.stopPropagation()}>
 
-                {/* TÍTULO */}
                 <h2 className="modal-titulo">{projeto.conteudo}</h2>
                 <p className="modal-sub">
                     Responsável: {projeto.usuario?.nome}
                 </p>
 
-                {/* LISTA DE TAREFAS */}
                 <h3 className="modal-sec-titulo">Tarefas</h3>
 
                 {tarefas.length === 0 ? (
@@ -40,7 +40,6 @@ export default function ProjetoModal({
                     </div>
                 )}
 
-                {/* BOTÃO FECHAR */}
                 <button className="modal-fechar" onClick={onClose}>
                     Fechar
                 </button>
